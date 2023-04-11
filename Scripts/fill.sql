@@ -1,7 +1,7 @@
 USE Schedule;
 
 DECLARE @subjectIndex int = 1;
-WHILE (@subjectIndex <= 30)
+WHILE (@subjectIndex <= 10)
 BEGIN
     INSERT INTO [Subject] (SubjectName)
     VALUES (N'Предмет ' + CAST(@subjectIndex AS nvarchar));
@@ -9,7 +9,7 @@ BEGIN
 END;
 
 DECLARE @groupIndex int = 1;
-WHILE (@groupIndex <= 30)
+WHILE (@groupIndex <= 10)
 BEGIN
     INSERT INTO [Group] (Course, GroupNumber, AmountOfStudents)
     VALUES ((@groupIndex % 5) + 1, N'Группа ' + CAST(@groupIndex AS nvarchar), 10 + (@groupIndex % 21));
@@ -17,7 +17,7 @@ BEGIN
 END;
 
 DECLARE @teacherIndex int = 1;
-WHILE (@teacherIndex <= 30)
+WHILE (@teacherIndex <= 10)
 BEGIN
     INSERT INTO Teacher (Surname, Name, Patronymic, Adress, Phone, AcademicDegree, AcademicPosition, Seniority)
     VALUES (N'Фамилия ' + CAST(@teacherIndex AS nvarchar), N'Имя ' + CAST(@teacherIndex AS nvarchar), N'Отчество ' + CAST(@teacherIndex AS nvarchar), N'Адрес ' + CAST(@teacherIndex AS nvarchar), N'8950123456' + CAST((@teacherIndex % 10) AS nvarchar), N'Кандидат наук', 'Доцент', @teacherIndex % 15);
@@ -25,7 +25,7 @@ BEGIN
 END;
 
 DECLARE @classIndex int = 1;
-WHILE (@classIndex <= 200)
+WHILE (@classIndex <= 30)
 BEGIN
     INSERT INTO Class (ClassTypeID, GroupID, SubjectID, TeacherID)
     VALUES ((@classIndex % 3) + 1, (@classIndex % 30) + 1, (@classIndex % 30) + 1, (@classIndex % 30) + 1);
@@ -33,7 +33,7 @@ BEGIN
 END;
 
 DECLARE @classScheduleIndex int = 1;
-WHILE (@classScheduleIndex <= 200)
+WHILE (@classScheduleIndex <= 30)
 BEGIN
     INSERT INTO ClassSchedule (ClassID, StartTime, EndTime, Auditorium)
     VALUES (@classScheduleIndex, DATEADD(minute, 80 * ((@classScheduleIndex - 1) % 4), '08:15:00'), DATEADD(minute, 80 * ((@classScheduleIndex - 1) % 4) + 80, '08:15:00'), N'Ауд. ' + CAST((@classScheduleIndex % 20) + 100 AS nvarchar));
@@ -41,7 +41,7 @@ BEGIN
 END;
 
 DECLARE @classPlanIndex int = 1;
-WHILE (@classPlanIndex <= 200)
+WHILE (@classPlanIndex <= 30)
 BEGIN
     INSERT INTO ClassPlan (ClassID, AcademicHoursCount)
     VALUES (@classPlanIndex, 20 + (@classPlanIndex % 30));
